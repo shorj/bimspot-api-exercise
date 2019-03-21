@@ -50,6 +50,8 @@
   <ItemGroup>
     <Compile Include="Client.cs" />
     <Compile Include="Dto\BaseDto.cs" />
+    <Compile Include="Dto\RegionDto.cs" />
+    <Compile Include="Dto\RegionListDto.cs" />
     <Compile Include="Dto\VersionDto.cs" />
     <Compile Include="Exceptions\ApiException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

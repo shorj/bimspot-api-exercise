@@ -55,6 +55,12 @@ namespace UICN.Api {
 			return Execute<VersionDto>(request, false).Version;
 		}
 
+		public RegionListDto GetRegionList() {
+			RestRequest request = new RestRequest("region/list");
+
+			return Execute<RegionListDto>(request);
+		}
+
 		#endregion
 	}
 }
