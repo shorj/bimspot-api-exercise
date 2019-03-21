@@ -1,0 +1,9 @@
+*.log
+*.DotSettings.user
+*.suo
+*.pubxml.user
+*.csproj.user
+bin/
+obj/
+packages/
+.vs/
