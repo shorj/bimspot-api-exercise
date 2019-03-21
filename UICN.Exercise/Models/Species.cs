@@ -74,9 +74,20 @@ namespace UICN.Exercise.Models {
 				Category = category;
 			} else {
 				//todo: find full list of possible categories, e. g. "NA" is returned, but it does not exist in the The Red List category list
-				//throw new ApplicationException($"Unknown Category = '{fromDto.Category}'");
+				//throw new ApplicationException($"Unknown Category = {fromDto.Category}");
 				Category = ESpeciesCategory.Unknown;
 			}
+		}
+
+		#endregion
+
+		#region Methods
+
+		public override string ToString() {
+			return
+				$"{nameof(TaxonId)} = {TaxonId}, {nameof(KingdomName)} = {KingdomName}, {nameof(PhylumName)} = {PhylumName}, {nameof(ClassName)} = {ClassName}, " +
+				$"{nameof(OrderName)} = {OrderName}, {nameof(FamilyName)} = {FamilyName}, {nameof(GenusName)} = {GenusName}, {nameof(ScientificName)} = {ScientificName}, " +
+				$"{nameof(InfraRank)} = {InfraRank}, {nameof(InfraName)} = {InfraName}, {nameof(Population)} = {Population}, {nameof(Category)} = {Category}";
 		}
 
 		#endregion

@@ -7,6 +7,7 @@ using UICN.Api;
 using UICN.Api.Dto;
 using UICN.Api.Exceptions;
 using UICN.Exercise.Models;
+using UICN.Exercise.Models.Enums;
 
 namespace UICN.Exercise {
 	internal static class Program {
@@ -53,7 +54,27 @@ namespace UICN.Exercise {
 					listSpecies.AddRange(from x in speciesListDto.Result select new Species(x));
 				}
 				Console.WriteLine($"Found {listSpecies.Count} species");
+				foreach(string className in listSpecies.Select(x => x.ClassName).Distinct()) {
+					System.Diagnostics.Debug.WriteLine(className);
+				}
 
+				Console.WriteLine("----- Critically endangered species with conservation measures:");
+				// 5. Filter the results for Critically Endangered species
+				foreach(Species species in listSpecies.Where(x => x.Category == ESpeciesCategory.CriticallyEndangered)) {
+					// todo 5.1. Fetch the conservation measures for all critically endangered species
+					// todo 5.2. Store the “title”-s of the response in the Species model as concatenated text property.
+					// 5.3. Print/display the results
+					Console.WriteLine(species);
+				}
+				Console.WriteLine();
+
+				// 6. Filter the results (from step 4) for the mammal class
+				Console.WriteLine("----- Mammals:");
+				foreach(Species species in listSpecies.Where(x => string.Compare(x.ClassName, "MAMMALIA", StringComparison.InvariantCultureIgnoreCase) == 0)) {
+					// 6.1. Print/display the results
+					Console.WriteLine(species);
+				}
+				Console.WriteLine();
 			} catch(ApiException apiException) {
 				// in case we need special handling for api exceptions
 				Console.WriteLine($"ApiException in the Main function:\r\n{apiException}");

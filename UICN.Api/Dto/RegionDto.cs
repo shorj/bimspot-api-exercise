@@ -20,7 +20,7 @@ namespace UICN.Api.Dto {
 		#region Methods
 
 		public override string ToString() {
-			return $"Id = '{Identifier}', Name = '{Name}'";
+			return $"Id = {Identifier}, Name = {Name}";
 		}
 
 		#endregion
