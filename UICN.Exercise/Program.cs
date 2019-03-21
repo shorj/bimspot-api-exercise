@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using UICN.Api;
 using UICN.Api.Dto;
 using UICN.Api.Exceptions;
+using UICN.Exercise.Models;
 
 namespace UICN.Exercise {
 	internal static class Program {
@@ -20,7 +21,38 @@ namespace UICN.Exercise {
 				Console.WriteLine($"Api version: {client.GetApiVersion()}");
 
 				// 1. Load the list of the available regions for species
-				RegionListDto regionList = client.GetRegionList();
+				RegionListDto regionListDto = client.GetRegionList();
+				int regionCount = regionListDto.Results.Count;
+				Console.WriteLine($"Region list contains {regionCount} items");
+
+				// 2. Take a random region from the list
+				if(regionCount < 1) {
+					Console.WriteLine("Region list is empty, the application will be ended");
+					return;
+				}
+				
+				// debug:
+				//int regionIndex = 3; // europe
+				//int regionIndex = 8; // global
+				int regionIndex = new Random().Next(0, regionCount);
+				RegionDto regionDto = regionListDto.Results[regionIndex];
+				Console.WriteLine($"Selected region: {regionDto}");
+
+				// 3. Load the list of all species in the selected region — the first page of the results would suffice, no need for pagination
+				// why not to implement pagination?
+				// 4. Create a model for “Species” and map the results to an array of Species.
+				// i would prefer List<Species> instead of array because of performance reasons, but array is also possible (we can use Array.Resize for changing its size)
+				// another option: convert the list ToArray() in the end
+				List<Species> listSpecies = new List<Species>(10000); // todo 2think: can we predict the initial capacity better? could it be better to request "Species Count" first?
+				for(int page = 0;; page++) {
+					SpeciesListDto speciesListDto = client.GetSpeciesListForRegion(regionDto.Identifier, page);
+					int speciesCount = speciesListDto.Result.Count;
+					if(speciesCount == 0) {
+						break;
+					}
+					listSpecies.AddRange(from x in speciesListDto.Result select new Species(x));
+				}
+				Console.WriteLine($"Found {listSpecies.Count} species");
 
 			} catch(ApiException apiException) {
 				// in case we need special handling for api exceptions

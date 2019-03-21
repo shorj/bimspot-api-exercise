@@ -61,6 +61,14 @@ namespace UICN.Api {
 			return Execute<RegionListDto>(request);
 		}
 
+		public SpeciesListDto GetSpeciesListForRegion(string regionId, int pageNumber) {
+			RestRequest request = new RestRequest("species/region/{RegionIdentifier}/page/{PageNumber}");
+			request.AddParameter("RegionIdentifier", regionId, ParameterType.UrlSegment);
+			request.AddParameter("PageNumber", pageNumber, ParameterType.UrlSegment);
+
+			return Execute<SpeciesListDto>(request);
+		}
+
 		#endregion
 	}
 }
