@@ -61,8 +61,18 @@ namespace UICN.Exercise {
 				Console.WriteLine("----- Critically endangered species with conservation measures:");
 				// 5. Filter the results for Critically Endangered species
 				foreach(Species species in listSpecies.Where(x => x.Category == ESpeciesCategory.CriticallyEndangered)) {
-					// todo 5.1. Fetch the conservation measures for all critically endangered species
-					// todo 5.2. Store the “title”-s of the response in the Species model as concatenated text property.
+					// 5.1. Fetch the conservation measures for all critically endangered species
+					ConservationMeasureListDto conservationMeasureListDto = 
+						client.GetConservationMeasures(species.TaxonId, regionDto.Identifier);		// change the second parameter to null if you need global assessments instead
+					// 5.2. Store the “title”-s of the response in the Species model as concatenated text property.
+					StringBuilder sb = new StringBuilder();
+					foreach(ConservationMeasureDto conservationMeasureDto in conservationMeasureListDto.Result) {
+						if(sb.Length > 0) {
+							sb.Append(", ");
+						}
+						sb.Append(conservationMeasureDto.Title);
+					}
+					species.ConservationMeasures = sb.ToString();
 					// 5.3. Print/display the results
 					Console.WriteLine(species);
 				}

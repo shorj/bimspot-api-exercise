@@ -52,6 +52,8 @@ namespace UICN.Exercise.Models {
 
 		public ESpeciesCategory Category { get; set; }
 
+		public string ConservationMeasures { get; set; }
+
 		#endregion
 
 		#region Constructors
@@ -87,7 +89,8 @@ namespace UICN.Exercise.Models {
 			return
 				$"{nameof(TaxonId)} = {TaxonId}, {nameof(KingdomName)} = {KingdomName}, {nameof(PhylumName)} = {PhylumName}, {nameof(ClassName)} = {ClassName}, " +
 				$"{nameof(OrderName)} = {OrderName}, {nameof(FamilyName)} = {FamilyName}, {nameof(GenusName)} = {GenusName}, {nameof(ScientificName)} = {ScientificName}, " +
-				$"{nameof(InfraRank)} = {InfraRank}, {nameof(InfraName)} = {InfraName}, {nameof(Population)} = {Population}, {nameof(Category)} = {Category}";
+				$"{nameof(InfraRank)} = {InfraRank}, {nameof(InfraName)} = {InfraName}, {nameof(Population)} = {Population}, {nameof(Category)} = {Category}, " +
+				$"{nameof(ConservationMeasures)} = {ConservationMeasures}";
 		}
 
 		#endregion

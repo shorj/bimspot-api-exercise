@@ -50,6 +50,8 @@
   <ItemGroup>
     <Compile Include="Client.cs" />
     <Compile Include="Dto\BaseDto.cs" />
+    <Compile Include="Dto\ConservationMeasureDto.cs" />
+    <Compile Include="Dto\ConservationMeasureListDto.cs" />
     <Compile Include="Dto\RegionDto.cs" />
     <Compile Include="Dto\RegionListDto.cs" />
     <Compile Include="Dto\SpeciesDto.cs" />

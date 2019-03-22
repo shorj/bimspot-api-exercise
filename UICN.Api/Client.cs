@@ -69,6 +69,20 @@ namespace UICN.Api {
 			return Execute<SpeciesListDto>(request);
 		}
 
+		public ConservationMeasureListDto GetConservationMeasures(int taxonId, string regionId = null) {
+			RestRequest request;
+			if(regionId != null) {
+				request = new RestRequest("measures/species/id/{TaxonId}/region/{RegionId}");
+				request.AddParameter("TaxonId", taxonId, ParameterType.UrlSegment);
+				request.AddParameter("RegionId", regionId, ParameterType.UrlSegment);
+			} else {
+				request = new RestRequest("measures/species/id/{TaxonId}");
+				request.AddParameter("TaxonId", taxonId, ParameterType.UrlSegment);
+			}
+
+			return Execute<ConservationMeasureListDto>(request);
+		}
+
 		#endregion
 	}
 }
