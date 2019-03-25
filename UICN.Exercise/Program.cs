@@ -54,9 +54,6 @@ namespace UICN.Exercise {
 					listSpecies.AddRange(from x in speciesListDto.Result select new Species(x));
 				}
 				Console.WriteLine($"Found {listSpecies.Count} species");
-				foreach(string className in listSpecies.Select(x => x.ClassName).Distinct()) {
-					System.Diagnostics.Debug.WriteLine(className);
-				}
 
 				Console.WriteLine("----- Critically endangered species with conservation measures:");
 				// 5. Filter the results for Critically Endangered species
